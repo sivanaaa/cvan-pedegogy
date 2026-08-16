@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>C.van Pedagogy — מיפוי פדגוגי אישי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Frank+Ruhl+Libre:ital,wght@0,500;0,700;0,900;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="grainFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0" />
+    </filter>
+  </defs>
+</svg>
+
+<div class="world">
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <div class="app-inner">
+
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-logo-wrap">
+            <img src="assets/logo.png" alt="C.van" class="brand-logo"
+                 onerror="this.style.display='none'; document.getElementById('logoPlaceholder').style.display='flex';">
+            <div id="logoPlaceholder" class="brand-logo-placeholder"><span>C.van</span></div>
+          </div>
+          <div class="brand-text">
+            <div class="brand-word">C.<span class="van-mark">van</span> Pedagogy</div>
+            <div class="brand-tagline">פדגוגיה<span class="dot">•</span>יצירתיות<span class="dot">•</span>דיגיטל</div>
+          </div>
+        </div>
+      </header>
+
+      <main id="app-main">
+
+        <!-- ============ LANDING ============ -->
+        <section id="screen-landing" class="screen active">
+          <div class="hero">
+            <span class="hero-quote" aria-hidden="true">“</span>
+            <p class="hero-kicker">מיפוי פדגוגי אישי</p>
+            <h1 class="hero-title">מה התלמידים צריכים.<br>מה משרד החינוך מצפה.<br><span class="accent">מה עושים עם זה בכיתה.</span></h1>
+            <p class="hero-sub">לא עוד דפי עבודה. תוכנית אמיתית, לכיתה שלך.</p>
+            <button class="btn btn-primary btn-hero" id="btnStart" type="button">בואי נתחיל</button>
+          </div>
+
+          <div class="transform-strip">
+            <p class="transform-label">ככה זה עובד</p>
+            <div class="transform-grid">
+              <div class="transform-col transform-col--from">
+                <h4>מה מצפים ממך</h4>
+                <ul class="transform-tags">
+                  <li>תוכנית לימודים</li>
+                  <li>מיפוי ויעדים</li>
+                  <li>מבדקים</li>
+                  <li>דרישות צוות</li>
+                </ul>
+              </div>
+              <div class="transform-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="transform-col transform-col--to">
+                <h4>מה קורה בכיתה</h4>
+                <ul class="transform-tags">
+                  <li>רצף הוראה ברור</li>
+                  <li>פעילות למחר בבוקר</li>
+                  <li>התאמות אמיתיות</li>
+                  <li>פרויקט כיתתי</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <article class="signature-panel">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <h3>מי מפצחת את זה איתך</h3>
+            <p class="signature-text">
+              אני עדיין מורה בכיתה. C.van Pedagogy נולד מתוך הכיתה — לא מהצד.
+            </p>
+            <div class="signature-audience">
+              <span class="signature-audience-label">למי זה מתאים:</span>
+              <ul class="chip-list">
+                <li>שפה</li><li>מתמטיקה</li><li>חינוך חברתי</li><li>למידה פרויקטלית</li><li>למידה עצמאית</li><li>פדגוגיה דיגיטלית</li>
+              </ul>
+            </div>
+          </article>
+
+          <div class="stamp-row">
+            <p class="stamp-row-label">מה תקבלי בסוף</p>
+            <div class="stamp-grid">
+              <div class="stamp-badge"><span class="stamp-ring">✓</span>תוכנית מותאמת אישית</div>
+              <div class="stamp-badge"><span class="stamp-ring">✓</span>רצף הוראה ברור</div>
+              <div class="stamp-badge"><span class="stamp-ring">✓</span>פרקטיקות שעובדות</div>
+              <div class="stamp-badge"><span class="stamp-ring">✓</span>מחובר לדרישות המשרד</div>
+            </div>
+          </div>
+
+          <div class="hero-footer">
+            <button class="btn btn-primary" id="btnStart2" type="button">למפות עכשיו</button>
+          </div>
+        </section>
+
+        <!-- ============ QUESTIONNAIRE ============ -->
+        <section id="screen-questionnaire" class="screen">
+          <div class="q-header">
+            <div class="tab-rail" id="tabRail" aria-hidden="true"></div>
+            <div class="progress-track" id="progressTrack" aria-hidden="true"></div>
+            <p class="progress-label" id="progressLabel">שלב 1 מתוך 6</p>
+          </div>
+
+          <div class="plan-card" id="planCard" aria-live="polite"></div>
+
+          <div id="sectionContainer" class="section-container"></div>
+
+          <div class="q-nav">
+            <button class="btn btn-ghost" id="btnBack" type="button">חזרה</button>
+            <button class="btn btn-primary" id="btnNext" type="button">להמשיך</button>
+          </div>
+        </section>
+
+        <!-- ============ SUMMARY ============ -->
+        <section id="screen-summary" class="screen">
+          <div class="summary-head">
+            <p class="hero-kicker">לפני שליחה</p>
+            <h2>ככה זה נראה</h2>
+            <p class="hero-sub">אפשר לערוך הכל, לפני שנשלח.</p>
+          </div>
+          <div id="summaryContainer" class="summary-container"></div>
+
+          <div id="submitError" class="submit-error" hidden></div>
+          <div class="q-nav">
+            <button class="btn btn-ghost" id="btnBackFromSummary" type="button">חזרה לעריכה</button>
+            <button class="btn btn-primary" id="btnSubmit" type="button">שליחה</button>
+          </div>
+        </section>
+
+        <!-- ============ THANK YOU ============ -->
+        <section id="screen-thankyou" class="screen">
+          <div class="hero thankyou">
+            <div class="thankyou-seal" aria-hidden="true">✓</div>
+            <p class="hero-kicker">התקבל</p>
+            <h1 class="hero-title">קיבלתי את כל <span class="accent">מה שכתבת.</span></h1>
+            <p class="hero-sub" id="thankyouBody">עכשיו התור שלי. הופכת את זה לתוכנית אחת שעובדת.</p>
+            <div class="plan-card plan-card--sealed" id="thankyouPlanCard"></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+<script src="interactions.js"></script>
+</body>
+</html>
