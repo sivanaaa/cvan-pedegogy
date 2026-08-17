@@ -442,9 +442,10 @@ async function submitQuestionnaire() {
 }
 
 function openMailtoFallback(messageText) {
+  const to = (typeof CVAN_CONFIG !== 'undefined' && CVAN_CONFIG.contactEmail) || '';
   const subject = encodeURIComponent(`שאלון C.van — ${state.answers.name || 'ללא שם'}`);
   const body = encodeURIComponent(messageText);
-  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
 // ---------------- wiring ----------------

@@ -19,7 +19,12 @@
 
 const CVAN_CONFIG = {
   // Paste your real Formspree ID between the quotes below (keep the /f/ prefix).
-  formspreeEndpoint: "https://formspree.io/f/YOUR_FORMSPREE_ID",
+  formspreeEndpoint: "https://formspree.io/f/maewpyjo",
+
+  // Where questionnaire answers should land if Formspree isn't configured
+  // yet (see above) — the mailto fallback addresses itself to this so it
+  // never sends to a blank "To:" field again.
+  contactEmail: "sivandavid250@gmail.com",
 
   // Payment gate: until this is configured, the "בואי נתחיל" buttons open the
   // questionnaire directly (so the site stays fully testable). Once you paste
