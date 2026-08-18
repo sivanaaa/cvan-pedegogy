@@ -398,6 +398,7 @@ async function submitQuestionnaire() {
 
   if (!isFormspreeConfigured()) {
     openMailtoFallback(messageText);
+    openWhatsAppFallback(messageText);
     submitBtn.disabled = false;
     submitBtn.textContent = 'שליחה';
     return;
@@ -426,15 +427,34 @@ async function submitQuestionnaire() {
     document.getElementById('thankyouBody').textContent =
       'עכשיו התור שלי. הופכת את זה לתוכנית אחת שעובדת.';
     showScreen('screen-thankyou');
+    wireWhatsappButton('btnWhatsappThankyou', messageText);
   } catch (err) {
+    // Never fail silently: try the email client AND WhatsApp automatically,
+    // and also show the raw answers as copyable text in case neither opens
+    // (e.g. no configured mail app / WhatsApp on this device).
+    openMailtoFallback(messageText);
+    openWhatsAppFallback(messageText);
     errorBox.hidden = false;
     errorBox.innerHTML =
-      'השליחה לא הצליחה הפעם — יכול להיות בעיית רשת זמנית. אפשר לנסות שוב, או ' +
-      '<a href="#" id="mailtoFallbackLink">לשלוח את התשובות במייל</a> ישירות.';
+      'השליחה האוטומטית לא הצליחה הפעם. פתחנו עבורך את תוכנת המייל (ואת וואטסאפ, אם מוגדר) כדי לשלוח את התשובות ישירות — ' +
+      'אם שום דבר לא נפתח, ' +
+      '<a href="#" id="mailtoFallbackLink">אפשר ללחוץ כאן לנסות שוב במייל</a>' +
+      '<span id="whatsappRetryWrap"></span>, ' +
+      'או להעתיק את התשובות ולשלוח אותן בעצמך:' +
+      '<textarea readonly id="rawAnswersFallback" style="width:100%;min-height:120px;margin-top:8px;" onclick="this.select()"></textarea>';
+    document.getElementById('rawAnswersFallback').value = messageText;
     document.getElementById('mailtoFallbackLink').addEventListener('click', (e) => {
       e.preventDefault();
       openMailtoFallback(messageText);
     });
+    if (isWhatsappConfigured()) {
+      const wrap = document.getElementById('whatsappRetryWrap');
+      wrap.innerHTML = ' או <a href="#" id="whatsappRetryLink">בוואטסאפ</a>';
+      document.getElementById('whatsappRetryLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        openWhatsAppFallback(messageText);
+      });
+    }
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = 'שליחה';
@@ -446,6 +466,32 @@ function openMailtoFallback(messageText) {
   const subject = encodeURIComponent(`שאלון C.van — ${state.answers.name || 'ללא שם'}`);
   const body = encodeURIComponent(messageText);
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+}
+
+function isWhatsappConfigured() {
+  return typeof CVAN_CONFIG !== 'undefined'
+    && CVAN_CONFIG.whatsappNumber
+    && !CVAN_CONFIG.whatsappNumber.includes('YOUR-WHATSAPP-NUMBER-HERE');
+}
+
+function openWhatsAppFallback(messageText) {
+  if (!isWhatsappConfigured()) return;
+  const num = CVAN_CONFIG.whatsappNumber.replace(/\D/g, '');
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(messageText)}`, '_blank');
+}
+
+// Always-available "send this over WhatsApp too" button — shown on the
+// thank-you screen regardless of whether the automatic email send worked,
+// so there's always a manual channel available, not only a failure fallback.
+function wireWhatsappButton(buttonId, messageText) {
+  const btn = document.getElementById(buttonId);
+  if (!btn) return;
+  if (!isWhatsappConfigured()) {
+    btn.hidden = true;
+    return;
+  }
+  btn.hidden = false;
+  btn.onclick = () => openWhatsAppFallback(messageText);
 }
 
 // ---------------- wiring ----------------

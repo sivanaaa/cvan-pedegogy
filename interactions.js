@@ -220,6 +220,16 @@
     }, true);
   } else if (paymentConfigured() && justPaid && typeof goToQuestionnaire === 'function') {
     goToQuestionnaire();
+  } else {
+    // A standalone shareable link straight into the questionnaire, skipping
+    // the landing page — e.g. https://…/?go=form — for sending directly to
+    // a teacher rather than the sales copy. Only takes effect when the
+    // payment gate isn't blocking (handled above), so a direct link can
+    // never be used to skip payment.
+    const params = new URLSearchParams(location.search);
+    if (params.get('go') === 'form' && typeof goToQuestionnaire === 'function') {
+      goToQuestionnaire();
+    }
   }
 
   onSectionChange();

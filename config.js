@@ -26,6 +26,13 @@ const CVAN_CONFIG = {
   // never sends to a blank "To:" field again.
   contactEmail: "sivandavid250@gmail.com",
 
+  // Your WhatsApp number, so a "לשלוח גם בוואטסאפ" button can appear —
+  // always, on both the thank-you screen and if the email send fails.
+  // Format: country code + number, digits only, no +, no spaces or dashes.
+  // Example: an Israeli 050-1234567 becomes "972501234567".
+  // Leave the placeholder below to keep the WhatsApp button hidden.
+  whatsappNumber: "972544454473",
+
   // Payment gate: until this is configured, the "בואי נתחיל" buttons open the
   // questionnaire directly (so the site stays fully testable). Once you paste
   // a real link below, those buttons say "מעבר לביט" and send visitors there
